@@ -9,6 +9,10 @@ public class BinaryTree<T> {
 
     private TreeNode<T> root;
 
+    public BinaryTree(TreeNode<T> root) {
+        this.root = root;
+    }
+
     public String inOrder() {
         return traverseInOrder(root);
     }
@@ -26,42 +30,37 @@ public class BinaryTree<T> {
     }
 
     private String traversePreOrder(TreeNode<T> root) {
-        return root + (root.getLeft() != null ? traverseInOrder(root.getLeft()) : "...") + (root.getRight() != null ? traverseInOrder(root.getRight()) : "...");
+        return root + (root.getLeft() != null ? traversePreOrder(root.getLeft()) : "...") + (root.getRight() != null ? traversePreOrder(root.getRight()) : "...");
     }
 
     private String traversePostOrder(TreeNode<T> root) {
-        return (root.getLeft() != null ? traverseInOrder(root.getLeft()) : "...") + (root.getRight() != null ? traverseInOrder(root.getRight()) : "...") + root;
-    }
-}
-
-class TreeNode<T> {
-
-    private T value;
-    private TreeNode<T> left;
-    private TreeNode<T> right;
-
-    public T getValue() {
-        return value;
+        return (root.getLeft() != null ? traversePostOrder(root.getLeft()) : "...") + (root.getRight() != null ? traversePostOrder(root.getRight()) : "...") + root;
     }
 
-    public TreeNode<T> getLeft() {
-        return left;
+    public int maxDepth(TreeNode<T> root) {
+        if (root == null) {
+            return 0;
+        }
+        return 1 + Math.max(maxDepth(root.getLeft()), maxDepth(root.getRight()));
     }
 
-    public void setLeft(TreeNode<T> left) {
-        this.left = left;
+    public int minDepth(TreeNode<T> root) {
+        if (root == null) {
+            return 0;
+        }
+        return 1 + Math.min(minDepth(root.getLeft()), minDepth(root.getRight()));
     }
 
-    public TreeNode<T> getRight() {
-        return right;
-    }
-
-    public void setRight(TreeNode<T> right) {
-        this.right = right;
+    public boolean isBalanced() {
+        return maxDepth(root) - minDepth(root) < 2;
     }
 
     @Override
     public String toString() {
-        return ">" + value;
+        return "BinaryTree{" +
+                "root=" + root +
+                '}';
     }
 }
+
+
