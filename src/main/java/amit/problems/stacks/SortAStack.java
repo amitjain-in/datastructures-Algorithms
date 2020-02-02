@@ -15,9 +15,9 @@ public class SortAStack {
 
     public static SimpleStack<Integer> sort(SimpleStack<Integer> stack) {
         SimpleStack<Integer> resultStack = new SimpleStack<>(Integer.class, "intermediate");
-        while (!stack.isEmpty()) {
+        while (stack.isNotEmpty()) {
             int elem = stack.pop();
-            if (!resultStack.isEmpty() && resultStack.peek() > elem) {
+            if (resultStack.isNotEmpty() && resultStack.peek() > elem) {
                 while (resultStack.peek() > elem) {
                     stack.push(resultStack.pop());
                 }

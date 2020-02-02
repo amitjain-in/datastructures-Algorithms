@@ -42,8 +42,8 @@ public class SimpleStack<T> {
         return elemSize;
     }
 
-    public boolean isEmpty() {
-        return size() == 0;
+    public boolean isNotEmpty() {
+        return size() != 0;
     }
 
     @Override
@@ -77,11 +77,11 @@ public class SimpleStack<T> {
     public static void main(String[] args) {
         SimpleStack<Integer> simpleStack = new SimpleStack<>(Integer.class, "p1");
         simpleStack.push(1).push(2).push(3);
-        System.out.println(simpleStack.pop());
+        System.out.println(simpleStack.pop());//3
         simpleStack.push(4);
-        System.out.println(simpleStack.pop());
-        System.out.println(simpleStack.pop());
-        System.out.println(simpleStack.pop());
-        System.out.println(simpleStack.pop());
+        System.out.println(simpleStack.pop());//4/
+        System.out.println(simpleStack.pop());//2
+        System.out.println(simpleStack.pop());//1
+        System.out.println(simpleStack.pop());//null
     }
 }
