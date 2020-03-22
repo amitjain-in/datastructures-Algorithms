@@ -27,7 +27,7 @@ public class SortUsingReverseK {
         if (length == 1) {
             return;
         }
-        int maxIdx = 0;
+        int maxIdx = 0;//Assume first element is the max
         for (int i = 0; i < length; i++) {
             if (arr[i] > arr[maxIdx]) {
                 maxIdx = i;
@@ -40,6 +40,11 @@ public class SortUsingReverseK {
         sortUsingReverseKInternal(arr, length - 1);//Now reduce tracking array by 1 and repeat
     }
 
+    /**
+     * Reverses an array up to k elements starting from 0.
+     * @param arr - The array to reverse
+     * @param k - Till the index to reverse
+     */
     private static void reverse(int[] arr, int k) {
         for (int i = 0; i <= k / 2; i++) {
             int tmp = arr[i];

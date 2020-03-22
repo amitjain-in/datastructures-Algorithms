@@ -3,7 +3,7 @@ package amit.problems.heaps;
 public class MinHeap {
     private static final int DEFAULT_SIZE = 100;
 
-    private int [] heap;
+    private final int [] heap;
     private int sz = 0;
 
     public MinHeap() {
