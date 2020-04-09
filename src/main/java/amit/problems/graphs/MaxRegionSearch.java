@@ -26,8 +26,7 @@ public class MaxRegionSearch {
             for (int j = 0; j < grid[0].length; j++) {
                 if (!visited[i][j]) {
                     if (grid[i][j] == 1) {
-                        currRegionSize += searchMore(grid, visited, i, j);
-                        //System.out.println("CR=" + currRegionSize + " MR=" + maxRegionSize);
+                        currRegionSize += dfs(grid, visited, i, j);
                         if (currRegionSize > maxRegionSize) {
                             maxRegionSize = currRegionSize;
                         }
@@ -41,34 +40,29 @@ public class MaxRegionSearch {
         return maxRegionSize;
     }
 
-    static int searchMore(int[][] grid, boolean[][] visited, int row, int col) {
+    static int dfs(int[][] grid, boolean[][] visited, int row, int col) {
         int more = !visited[row][col] ? grid[row][col] : 0;
         if (visited[row][col] || more == 0) {
             return more;
         }
         visited[row][col] = true;
-        //System.out.println("Col+1 =" + (col + 1) + " gridLen=" + grid[0].length);
         if (col + 1 < grid[0].length) {//Side
             if (!visited[row][col + 1]) {
-                more += searchMore(grid, visited, row, col + 1);
-                //System.out.println("Right=" + more);
+                more += dfs(grid, visited, row, col + 1);
             }
         }//Bottom
         if (row + 1 < grid.length) {
             if (col + 1 < grid[0].length) {
                 if (!visited[row + 1][col + 1]) {
-                    more += searchMore(grid, visited, row + 1, col + 1);
-                    // System.out.println("BottomRight=" + more);
+                    more += dfs(grid, visited, row + 1, col + 1);
                 }
             }
             if (!visited[row + 1][col]) {
-                more += searchMore(grid, visited, row + 1, col);
-                // System.out.println("Bottom=" + more);
+                more += dfs(grid, visited, row + 1, col);
             }
             if (col - 1 >= 0) {
                 if (!visited[row + 1][col - 1]) {
-                    more += searchMore(grid, visited, row + 1, col - 1);
-                    // System.out.println("BottomLeft=" + more);
+                    more += dfs(grid, visited, row + 1, col - 1);
                 }
             }
         }
@@ -76,16 +70,13 @@ public class MaxRegionSearch {
         //Top
         if (row - 1 >= 0) {
             if (col - 1 >= 0 && !visited[row - 1][col - 1]) {
-                more += searchMore(grid, visited, row - 1, col - 1);
-                // System.out.println("BottomLeft=" + more);
+                more += dfs(grid, visited, row - 1, col - 1);
             }
             if (!visited[row - 1][col]) {
-                more += searchMore(grid, visited, row - 1, col);
-                // System.out.println("BottomLeft=" + more);
+                more += dfs(grid, visited, row - 1, col);
             }
             if (col + 1 < grid[0].length && !visited[row - 1][col + 1]) {
-                more += searchMore(grid, visited, row - 1, col + 1);
-                // System.out.println("BottomLeft=" + more);
+                more += dfs(grid, visited, row - 1, col + 1);
             }
         }
         return more;
