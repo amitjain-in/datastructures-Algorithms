@@ -1,4 +1,4 @@
-package amit.problems.arrays;
+package amit.problems.dp;
 
 /**
  * Given several boxes with different colors represented by different positive numbers.
