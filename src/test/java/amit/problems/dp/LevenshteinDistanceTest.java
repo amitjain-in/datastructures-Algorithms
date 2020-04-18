@@ -8,6 +8,7 @@ public class LevenshteinDistanceTest {
     @Test
     public void testDistance() {
         LevenshteinDistance ld = new LevenshteinDistance();
+        Assert.assertEquals(ld.distance("hellow", "hellop"), 1);
         Assert.assertEquals(ld.distance("hellow", "hellow"), 0);
         Assert.assertEquals(ld.distance("hello", "hello1"), 1);
         Assert.assertEquals(ld.distance("hello", "hello12"), 2);

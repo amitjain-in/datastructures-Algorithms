@@ -13,29 +13,18 @@ public class LongestSubArray {
     }
 
     private static int[] findLongestSubArray(int[] arr, int k) {
-        int maxStartIdx = 0;
-        int maxEndIdx = 0;
-        int maxSum = arr[0];
-        int currStartIdx = 0;
-        int currEndIdx = 0;
-        int currentSum = arr[0];
-        for (int i = 1; i < arr.length; i++) {
-            if (maxSum <= currentSum + arr[i]) {
-                currentSum += arr[i];
-                maxSum = currentSum;
-                currEndIdx = i;
-                maxStartIdx = currStartIdx;
-                maxEndIdx = currEndIdx;
-            } else if (currentSum <= currentSum + arr[i]) {
-                currentSum += arr[i];
-                currEndIdx = i;
-            } else {
-                currStartIdx = i + 1;
-                currEndIdx = i + 1;
+
+        int[] maxLengthArray = new int[arr.length];
+        int maxLength = 0;
+
+        for(int i = 0; i < arr.length; i++) {
+            maxLengthArray[i] = 1;
+            int sum = 0;
+            int length = 0;
+            for(int j = i; j < arr.length; j++) {
+                sum += arr[j];
             }
         }
-        int[] returnArr = new int[maxEndIdx - maxStartIdx];
-        System.arraycopy(arr, maxStartIdx, returnArr, 0, maxEndIdx - maxStartIdx);
-        return returnArr;
+        return maxLengthArray;
     }
 }
