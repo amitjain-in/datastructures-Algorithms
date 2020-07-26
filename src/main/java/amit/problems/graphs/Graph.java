@@ -10,6 +10,14 @@ public class Graph<T> {
     private final List<Vertex<T>> vertices = new LinkedList<>();
     private final List<Edge<T>> edges = new LinkedList<>();
 
+    public List<Vertex<T>> getVertices() {
+        return vertices;
+    }
+
+    public List<Edge<T>> getEdges() {
+        return edges;
+    }
+
     public void addVertex(Vertex<T> vertex) {
         vertices.add(vertex);
     }
@@ -37,12 +45,14 @@ public class Graph<T> {
     }
 
     static class Edge<T> {
-        final Vertex<T> a;
         final Vertex<T> b;
         final int weight;
 
-        public Edge (Vertex<T> a, Vertex<T> b, int weight) {
-            this.a = a;
+        public Edge(Vertex<T> b) {
+            this(b, 1);
+        }
+
+        public Edge(Vertex<T> b, int weight) {
             this.b = b;
             this.weight = weight;
         }
