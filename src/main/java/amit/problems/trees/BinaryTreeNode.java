@@ -1,12 +1,12 @@
 package amit.problems.trees;
 
-public class TreeNode<T> {
+public class BinaryTreeNode<T> {
 
     private T value;
-    private TreeNode<T> left;
-    private TreeNode<T> right;
+    private BinaryTreeNode<T> left;
+    private BinaryTreeNode<T> right;
 
-    TreeNode(T value) {
+    BinaryTreeNode(T value) {
         this.value = value;
     }
 
@@ -14,19 +14,19 @@ public class TreeNode<T> {
         return value;
     }
 
-    public TreeNode<T> getLeft() {
+    public BinaryTreeNode<T> getLeft() {
         return left;
     }
 
-    public void setLeft(TreeNode<T> left) {
+    public void setLeft(BinaryTreeNode<T> left) {
         this.left = left;
     }
 
-    public TreeNode<T> getRight() {
+    public BinaryTreeNode<T> getRight() {
         return right;
     }
 
-    public void setRight(TreeNode<T> right) {
+    public void setRight(BinaryTreeNode<T> right) {
         this.right = right;
     }
 

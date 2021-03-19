@@ -10,7 +10,7 @@ public class ArrayToTree {
     }
 
     private static void createTree(int numberOfElements) {
-        TreeNode<Integer> root = new TreeNode<>(numberOfElements / 2);
+        BinaryTreeNode<Integer> root = new BinaryTreeNode<>(numberOfElements / 2);
         createTree(numberOfElements);
     }
 }

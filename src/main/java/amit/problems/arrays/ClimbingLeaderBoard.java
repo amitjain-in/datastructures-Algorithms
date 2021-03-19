@@ -15,9 +15,6 @@ public class ClimbingLeaderBoard {
      * @return - The rank of alice after each of the m games.
      */
     static int[] climbingLeaderBoard(int[] scores, int[] alice) {
-        int aliceIdx = 0;
-        int scoresIdx = scores.length - 1;
-        int[] aliceRanks = new int[alice.length];
         HashMap<Integer, Integer> ranks = new HashMap<>();
         int prevScore = Integer.MIN_VALUE;
         int rank = 1;
@@ -27,6 +24,10 @@ public class ClimbingLeaderBoard {
                 prevScore = score;
             }
         }
+
+        int aliceIdx = 0;
+        int scoresIdx = scores.length - 1;
+        int[] aliceRanks = new int[alice.length];
 
         while (scoresIdx >= 0 && aliceIdx < alice.length) {
             while (scoresIdx > 0 && alice[aliceIdx] > scores[scoresIdx]) {

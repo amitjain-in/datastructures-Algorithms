@@ -7,9 +7,9 @@ package amit.problems.trees;
  */
 public class BinaryTree<T> {
 
-    private TreeNode<T> root;
+    private BinaryTreeNode<T> root;
 
-    public BinaryTree(TreeNode<T> root) {
+    public BinaryTree(BinaryTreeNode<T> root) {
         this.root = root;
     }
 
@@ -25,26 +25,26 @@ public class BinaryTree<T> {
         return traversePostOrder(root);
     }
 
-    private String traverseInOrder(TreeNode<T> root) {
+    private String traverseInOrder(BinaryTreeNode<T> root) {
         return (root.getLeft() != null ? traverseInOrder(root.getLeft()) : "...") + root + (root.getRight() != null ? traverseInOrder(root.getRight()) : "...");
     }
 
-    private String traversePreOrder(TreeNode<T> root) {
+    private String traversePreOrder(BinaryTreeNode<T> root) {
         return root + (root.getLeft() != null ? traversePreOrder(root.getLeft()) : "...") + (root.getRight() != null ? traversePreOrder(root.getRight()) : "...");
     }
 
-    private String traversePostOrder(TreeNode<T> root) {
+    private String traversePostOrder(BinaryTreeNode<T> root) {
         return (root.getLeft() != null ? traversePostOrder(root.getLeft()) : "...") + (root.getRight() != null ? traversePostOrder(root.getRight()) : "...") + root;
     }
 
-    public int maxDepth(TreeNode<T> root) {
+    public int maxDepth(BinaryTreeNode<T> root) {
         if (root == null) {
             return 0;
         }
         return 1 + Math.max(maxDepth(root.getLeft()), maxDepth(root.getRight()));
     }
 
-    public int minDepth(TreeNode<T> root) {
+    public int minDepth(BinaryTreeNode<T> root) {
         if (root == null) {
             return 0;
         }
