@@ -1,5 +1,10 @@
 package amit.problems.dp;
 
+
+/**
+ * Imagine you have infinite supply of coins of certain denominations given in an array and you are given a value n.
+ * Find out how many unique ways can make the number n from the coins supply.
+ */
 public class CoinChangeWays {
 
     public static void main(String[] args) {

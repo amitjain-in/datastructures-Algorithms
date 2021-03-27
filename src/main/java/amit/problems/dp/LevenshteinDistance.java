@@ -2,6 +2,9 @@ package amit.problems.dp;
 
 import java.util.Arrays;
 
+/**
+ * Primitive algorithm that can be used as a base for spell correction features of various apps.
+ */
 public class LevenshteinDistance {
 
     public int distance(String pattern, String text) {
@@ -23,6 +26,10 @@ public class LevenshteinDistance {
            return dp[patternStart][textStart];
         }
 
+        // Contains three conditions
+        // 1) Assume pattern/text not matching and we reduce with pattern char by 1,
+        // 2) Same as 1) but reduce text char by 1 instead of pattern
+        // 3) its a match or not but we reduce both string comparison by 1. This way we will get minimum of all possible
         int distance = Math.min(Math.min(
                 distance(pattern, text, patternStart - 1, textStart, dp) + 1,
                 distance(pattern, text, patternStart, textStart - 1, dp) + 1),

@@ -2,6 +2,9 @@ package amit.problems.dp;
 
 import java.util.Arrays;
 
+/**
+ * Find the maximum increasing array (include non-contiguous elements too in sub-array consideration).
+ */
 public class LongestIncreasingSubArray {
 
     public static void main(String[] args) {
@@ -19,6 +22,7 @@ public class LongestIncreasingSubArray {
         int maxEnd = 0;
         int maxLength = 0;
 
+        //We calculate the max sub arrays values for initial index and then use the same values to find max values of further indexes.
         for (int i = 0; i < arr.length; i++) {
             maxIdx[i] = 1;
             for (int j = 0; j < i; j++) {
@@ -34,6 +38,7 @@ public class LongestIncreasingSubArray {
 
         int[] result = new int[maxLength];
 
+        //Trace back the array to find the final Max length Sub-Array
         for (int i = maxEnd; i >= 0; i--) {
             if (maxLength == maxIdx[i]) {
                 result[--maxLength] = arr[i];

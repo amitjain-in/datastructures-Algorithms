@@ -20,7 +20,6 @@ public class NumberOfIslands {
                         {'1', '1', '0', '0', '0'},
                         {'0', '0', '1', '0', '0'},
                         {'0', '0', '0', '1', '1'}
-
                 }));
     }
 
@@ -28,42 +27,44 @@ public class NumberOfIslands {
 
         int rows = grid.length;
         int cols = grid[0].length;
-        boolean[][] visited = new boolean[rows][cols];//You can also use the same 'grid' and mark the lands '1' as 'o' and save some space
+        boolean[][] visited = new boolean[rows][cols];//You can also use the same 'grid' and mark the lands '1' as '0' and save some space while traversing.
 
         int islands = 0;
 
         for (int row = 0; row < rows; row++) {
-
             for (int col = 0; col < cols; col++) {
                 if (!visited[row][col] && grid[row][col] == '1') {
-                    if (isIsland(grid, visited, row, col, rows, cols)) {
+                    if (dfs(grid, visited, row, col, rows, cols)) {
                         islands++;
                     }
                 }
             }
         }
-
         return islands;
     }
 
-    public boolean isIsland(char[][] grid, boolean[][] visited, int row, int col, int rows, int cols) {
+    public boolean dfs(char[][] grid, boolean[][] visited, int row, int col, int rows, int cols) {
         boolean isIsland = true;
         visited[row][col] = true;
 
+        //Go down
         if (row + 1 < rows && grid[row + 1][col] == '1' && !visited[row + 1][col]) {
-            isIsland = isIsland(grid, visited, row + 1, col, rows, cols);
+            isIsland = dfs(grid, visited, row + 1, col, rows, cols);
         }
 
+        //Go right
         if (col + 1 < cols && grid[row][col + 1] == '1' && !visited[row][col + 1]) {
-            isIsland = isIsland & isIsland(grid, visited, row, col + 1, rows, cols);
+            isIsland = isIsland & dfs(grid, visited, row, col + 1, rows, cols);
         }
 
+        //Go up
         if (row > 0 && grid[row - 1][col] == '1' && !visited[row - 1][col]) {
-            isIsland = isIsland & isIsland(grid, visited, row - 1, col, rows, cols);
+            isIsland = isIsland & dfs(grid, visited, row - 1, col, rows, cols);
         }
 
+        //Go left
         if (col > 0 && grid[row][col - 1] == '1' && !visited[row][col - 1]) {
-            isIsland = isIsland & isIsland(grid, visited, row, col - 1, rows, cols);
+            isIsland = isIsland & dfs(grid, visited, row, col - 1, rows, cols);
         }
 
         return isIsland;
