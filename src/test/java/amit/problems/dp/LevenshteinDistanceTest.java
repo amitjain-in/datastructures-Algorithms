@@ -15,6 +15,7 @@ public class LevenshteinDistanceTest {
         Assert.assertEquals(ld.distance("hello12", "hello"), 2);
         Assert.assertEquals(ld.distance("hellow", "hello"), 1);
         Assert.assertEquals(ld.distance("whello", "hello"), 1);
+        Assert.assertEquals(ld.distance("whello", "bhello"), 1);
         Assert.assertEquals(ld.distance("helelo", "hello"), 1);
         Assert.assertEquals(ld.distance("hello", "helelo"), 1);
     }

@@ -18,7 +18,9 @@ public class LevenshteinDistance {
 
     private int distance(char[] pattern, char[] text, int patternStart, int textStart, int[][] dp) {
 
-        if (0 == patternStart || 0 == textStart) {
+        if (0 == patternStart && 0 == textStart) {
+            return pattern[patternStart] == text[textStart] ? 0 : 1;
+        } else if(0 == patternStart || 0 == textStart) {
             return Math.abs(textStart - patternStart);
         }
 
