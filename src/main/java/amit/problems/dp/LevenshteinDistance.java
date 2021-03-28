@@ -10,22 +10,28 @@ public class LevenshteinDistance {
     public int distance(String pattern, String text) {
         int[][] dp = new int[pattern.length()][text.length()];
         for (int[] ints : dp) {
-            Arrays.fill(ints, -1);
+            Arrays.fill(ints, Integer.MAX_VALUE);
         }
 
-        return distance(pattern.toCharArray(), text.toCharArray(), pattern.length() - 1, text.length() - 1, dp);
+        for (int i = 0; i < pattern.length(); i++)
+            dp[i][0] = i;
+        for (int i = 1; i < text.length(); i++)
+            dp[0][i] = i;
+
+        return distance(pattern.toCharArray(), text.toCharArray(), pattern.length() - 1,
+                text.length() - 1, dp);
     }
 
     private int distance(char[] pattern, char[] text, int patternStart, int textStart, int[][] dp) {
 
         if (0 == patternStart && 0 == textStart) {
             return pattern[patternStart] == text[textStart] ? 0 : 1;
-        } else if(0 == patternStart || 0 == textStart) {
+        } else if (0 == patternStart || 0 == textStart) {
             return Math.abs(textStart - patternStart);
         }
 
-        if(dp[patternStart][textStart] != -1) {
-           return dp[patternStart][textStart];
+        if (dp[patternStart][textStart] != Integer.MAX_VALUE) {
+            return dp[patternStart][textStart];
         }
 
         // Contains three conditions
