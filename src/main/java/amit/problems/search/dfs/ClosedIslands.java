@@ -72,7 +72,7 @@ public class ClosedIslands {
 
             for (int col = 1; col < cols - 1; col++) {
                 if (!visited[row][col] && grid[row][col] == 0) {
-                    if (isIsland(grid, visited, row, col, rows, cols)) {
+                    if (dfs(grid, visited, row, col, rows, cols)) {
                         closedIslands++;
                     }
                 }
@@ -82,7 +82,7 @@ public class ClosedIslands {
         return closedIslands;
     }
 
-    public boolean isIsland(int[][] grid, boolean[][] visited, int row, int col, int rows, int cols) {
+    public boolean dfs(int[][] grid, boolean[][] visited, int row, int col, int rows, int cols) {
         boolean isIsland = true;
         visited[row][col] = true;
 
@@ -99,19 +99,19 @@ public class ClosedIslands {
         }
 
         if (row < rows && grid[row + 1][col] == 0 && !visited[row + 1][col]) {
-            isIsland = isIsland(grid, visited, row + 1, col, rows, cols);
+            isIsland = dfs(grid, visited, row + 1, col, rows, cols);
         }
 
         if (col < cols && grid[row][col + 1] == 0 && !visited[row][col + 1]) {
-            isIsland = isIsland & isIsland(grid, visited, row, col + 1, rows, cols);
+            isIsland = isIsland & dfs(grid, visited, row, col + 1, rows, cols);
         }
 
         if (row > 0 && grid[row - 1][col] == 0 && !visited[row - 1][col]) {
-            isIsland = isIsland & isIsland(grid, visited, row - 1, col, rows, cols);
+            isIsland = isIsland & dfs(grid, visited, row - 1, col, rows, cols);
         }
 
         if (col > 0 && grid[row][col - 1] == 0 && !visited[row][col - 1]) {
-            isIsland = isIsland & isIsland(grid, visited, row, col - 1, rows, cols);
+            isIsland = isIsland & dfs(grid, visited, row, col - 1, rows, cols);
         }
 
         return isIsland;

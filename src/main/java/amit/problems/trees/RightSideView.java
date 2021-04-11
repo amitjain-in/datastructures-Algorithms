@@ -27,34 +27,19 @@ public class RightSideView {
             q1.add(root);
             TreeNode lastNodeAtLevel = root;
             while (!q1.isEmpty() || !q2.isEmpty()) {
-                if (isQ1) {
-                    TreeNode node = q1.poll();
-                    if (node != null) {
-                        if (node.left != null) {
-                            q2.add(node.left);
-                        }
-                        if (node.right != null) {
-                            q2.add(node.right);
-                        }
-                        lastNodeAtLevel = node;
-                    } else {
-                        output.add(lastNodeAtLevel.val);
-                        isQ1 = false;
+                Queue<TreeNode> q = isQ1 ? q1 : q2;
+                TreeNode node = q.poll();
+                if (node != null) {
+                    if (node.left != null) {
+                        q.add(node.left);
                     }
+                    if (node.right != null) {
+                        q.add(node.right);
+                    }
+                    lastNodeAtLevel = node;
                 } else {
-                    TreeNode node = q2.poll();
-                    if (node != null) {
-                        if (node.left != null) {
-                            q1.add(node.left);
-                        }
-                        if (node.right != null) {
-                            q1.add(node.right);
-                        }
-                        lastNodeAtLevel = node;
-                    } else {
-                        output.add(lastNodeAtLevel.val);
-                        isQ1 = true;
-                    }
+                    output.add(lastNodeAtLevel.val);
+                    isQ1 = !isQ1;
                 }
             }
             output.add(lastNodeAtLevel.val);//Last node to be traversed will always be missed, hence add here.

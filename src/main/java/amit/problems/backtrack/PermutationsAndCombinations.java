@@ -5,14 +5,29 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Credit - All code taken from reference page here. https://leetcode.com/problems/combination-sum/discuss/16502/A-general-approach-to-backtracking-questions-in-Java-(Subsets-Permutations-Combination-Sum-Palindrome-Partitioning)
+ * Credit - All code taken from reference page below link.
+ * https://leetcode.com/problems/combination-sum/discuss/16502/A-general-approach-to-backtracking-questions-in-Java-(Subsets-Permutations-Combination-Sum-Palindrome-Partitioning)
  */
 public class PermutationsAndCombinations {
 
+    public static void main(String[] args) {
+        PermutationsAndCombinations pac = new PermutationsAndCombinations();
+//        int[] arr = new int[]{7, 4, 5, 8};
+//        int[] arrWDup = new int[]{7, 4, 5, 8, 4, 5, 5};
+//        /*System.out.println("Subsets: " + pac.subsets(arr));
+//        System.out.println("Subsets with Dup: " + pac.subsetsWithDup(arrWDup));*/
+//        System.out.println("Permutations: " + pac.permute(arr));
+//        System.out.println("Permutations with Dup: " + pac.permuteUnique(arrWDup));
+//
+//        System.out.println("Palindrome Partitioning: " + pac.partition("aaabbc"));
+
+        pac.printNumbersOfIntervals(new int[][]{{1, 3}, {4, 5}, {5, 6}});
+    }
+
     //https://leetcode.com/problems/subsets/
     public List<List<Integer>> subsets(int[] nums) {
+        //nums shouldn't contain duplicates
         List<List<Integer>> list = new ArrayList<>();
-        Arrays.sort(nums);
         backtrackSubSet(list, new ArrayList<>(), nums, 0);
         return list;
     }
@@ -45,10 +60,9 @@ public class PermutationsAndCombinations {
     }
 
 
-    //Permutations
+    //Permutations including all elements.
     public List<List<Integer>> permute(int[] nums) {
         List<List<Integer>> list = new ArrayList<>();
-        // Arrays.sort(nums); // not necessary
         backtrackPermute(list, new ArrayList<>(), nums);
         return list;
     }
@@ -92,7 +106,6 @@ public class PermutationsAndCombinations {
     //CombinationSum https://leetcode.com/problems/combination-sum/
     public List<List<Integer>> combinationSum(int[] nums, int target) {
         List<List<Integer>> list = new ArrayList<>();
-        Arrays.sort(nums);
         backtrackCombinationSum(list, new ArrayList<>(), nums, target, 0);
         return list;
     }
@@ -111,8 +124,7 @@ public class PermutationsAndCombinations {
     }
 
     //With Duplicate https://leetcode.com/problems/combination-sum-ii/
-
-    public List<List<Integer>> combinationSum2(int[] nums, int target) {
+    public List<List<Integer>> combinationSumWithDup(int[] nums, int target) {
         List<List<Integer>> list = new ArrayList<>();
         Arrays.sort(nums);
         backtrackCombinationSumWithDup(list, new ArrayList<>(), nums, target, 0);
@@ -159,5 +171,27 @@ public class PermutationsAndCombinations {
         while (low < high)
             if (s.charAt(low++) != s.charAt(high--)) return false;
         return true;
+    }
+
+
+    // Permutation of intervals
+    // Supposed you are given a set of intervals. Print all possible number combinations of those interval including the integer range between the intervals.
+    // E.g. two intervals [1, 3] [4, 5]. Then you need to print 14, 15, 24, 25 24 25. Because 1,3 expands to 1,2,3 and combination of each of those with second interval
+    // First element of an interval will always be smaller or equal to second element.
+    public void printNumbersOfIntervals(int[][] intervals) {
+        printNumbersOfIntervals(intervals, 0, (int) Math.pow(10, intervals.length - 1), 0);
+    }
+
+    private void printNumbersOfIntervals(int[][] intervals, int i, int tens, int add) {
+        if (i == intervals.length) {
+            System.out.println(add);
+            return;
+        }
+        int interval = intervals[i][0];
+        int endInterval = intervals[i][1];
+        while (interval <= endInterval) {
+            printNumbersOfIntervals(intervals, i + 1, tens / 10, interval * tens + add);
+            interval++;
+        }
     }
 }

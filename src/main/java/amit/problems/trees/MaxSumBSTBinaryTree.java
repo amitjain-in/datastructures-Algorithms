@@ -12,7 +12,7 @@ public class MaxSumBSTBinaryTree {
         MaxSumBSTBinaryTree maxSumBSTBinaryTree = new MaxSumBSTBinaryTree();
 //        System.out.println(maxSumBSTBinaryTree.maxSumBST(TreeNode.arrayToTree(new Integer[]{1, 4, 3, 2, 4, 2, 5, null, null, null, null, null, null, 4, 6}))); //20
 //        System.out.println(maxSumBSTBinaryTree.maxSumBST(TreeNode.arrayToTree(new Integer[]{4, 3, null, 1, 2, null, null}))); //2
-        System.out.println(maxSumBSTBinaryTree.maxSumBST(TreeNode.arrayToTree(new Integer[]{4, 8, null, 6, 1, 9, null, -5, 4, null, null, null, -3, null, 10}))); //14
+        System.out.println(maxSumBSTBinaryTree.maxSumBST(TreeNode.arrayToTree(new Integer[]{4, 8, null, 6, 1, 9, null, -5, 4, null, null, null, -3, null, 10}))); //14,
 
     }
 
@@ -28,13 +28,19 @@ public class MaxSumBSTBinaryTree {
 
         if (root.left == null && root.right == null) {
             thisBST.maxSum = root.val;
+            thisBST.minChildVal = root.val;
+            thisBST.maxChildVal = root.val;
             return thisBST;
         }
 
         BST leftBST = maxBST(root.left);
         BST rightBST = maxBST(root.right);
+
+        thisBST.minChildVal = Math.min(root.val, Math.min(leftBST.minChildVal, rightBST.minChildVal));
+        thisBST.maxChildVal = Math.max(root.val, Math.min(leftBST.maxChildVal, rightBST.maxChildVal));
+
         if (root.left != null && leftBST.isBalanced) {
-            if (root.val < root.left.val) {
+            if (root.val < leftBST.maxChildVal) {
                 thisBST.isBalanced = false;
                 thisBST.maxSum = Math.max(leftBST.maxSum, rightBST.maxSum);
                 return thisBST;
@@ -42,7 +48,7 @@ public class MaxSumBSTBinaryTree {
             thisBST.maxSum = Math.max(Math.max(leftBST.maxSum, rightBST.maxSum), leftBST.maxSum + rightBST.maxSum + root.val);
         }
         if (root.right != null && rightBST.isBalanced) {
-            if (root.val > root.right.val) {
+            if (root.val > rightBST.minChildVal) {
                 thisBST.isBalanced = false;
                 thisBST.maxSum = Math.max(leftBST.maxSum, rightBST.maxSum);
                 return thisBST;
@@ -60,5 +66,7 @@ public class MaxSumBSTBinaryTree {
     static class BST {
         boolean isBalanced = true;
         int maxSum = 0;
+        int minChildVal = Integer.MAX_VALUE;
+        int maxChildVal = Integer.MIN_VALUE;
     }
 }
