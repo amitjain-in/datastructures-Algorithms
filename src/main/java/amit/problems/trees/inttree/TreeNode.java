@@ -19,9 +19,14 @@ public class TreeNode {
         this.right = right;
     }
 
+//    @Override
+//    public String toString() {
+//        return "\nV = " + val + "[left = " + (left != null ? left.val : null) + ", right = " + (right != null ? right.val : null) + "]";
+//    }
+
     @Override
     public String toString() {
-        return "\nV = " + val + "[left = " + (left != null ? left.val : null) + ", right = " + (right != null ? right.val : null) + "]";
+        return "" + val;
     }
 
     public static TreeNode arrayToTree(Integer[] arr) {

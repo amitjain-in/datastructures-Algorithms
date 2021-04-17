@@ -18,36 +18,36 @@ public class ZigzagTraversal {
 
     }
 
-    //Works - but can be optimised
+    //Works - but can be optimised for lines of code?
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
 
-        Stack<TreeNode> stack1 = new Stack<>();
-        Stack<TreeNode> stack = new Stack<>();
+        Stack<TreeNode> leftToRight = new Stack<>();
+        Stack<TreeNode> rightToLeft = new Stack<>();
         boolean lToR = true;
         List<List<Integer>> results = new LinkedList<>();
 
         if(root != null) {
-            stack1.add(root);
+            leftToRight.add(root);
         }
         List<Integer> level = new LinkedList<>();
 
-        while(!stack1.isEmpty() || !stack.isEmpty()) {
+        while(!leftToRight.isEmpty() || !rightToLeft.isEmpty()) {
             if (lToR) {
-                while (!stack1.isEmpty()) {
-                    TreeNode node = stack1.pop();
+                while (!leftToRight.isEmpty()) {
+                    TreeNode node = leftToRight.pop();
                     level.add(node.val);
-                    if (node.left != null) stack.push(node.left);
-                    if (node.right != null) stack.push(node.right);
+                    if (node.left != null) rightToLeft.push(node.left);
+                    if (node.right != null) rightToLeft.push(node.right);
                 }
                 results.add(level);
                 level = new LinkedList<>();
                 lToR = false;
             } else {
-                while(!stack.isEmpty()) {
-                    TreeNode node = stack.pop();
+                while(!rightToLeft.isEmpty()) {
+                    TreeNode node = rightToLeft.pop();
                     level.add(node.val);
-                    if (node.right != null) stack1.add(node.right);
-                    if (node.left != null) stack1.add(node.left);
+                    if (node.right != null) leftToRight.add(node.right);
+                    if (node.left != null) leftToRight.add(node.left);
                 }
                 results.add(level);
                 level = new LinkedList<>();

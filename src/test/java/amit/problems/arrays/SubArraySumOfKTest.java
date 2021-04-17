@@ -17,5 +17,6 @@ public class SubArraySumOfKTest {
         SubArraySumOfK subArraySumOfK = new SubArraySumOfK();
         Assert.assertEquals(subArraySumOfK.subArraySumOptimised(new int[]{2, 3, 4, 1}, 4), 1);
         Assert.assertEquals(subArraySumOfK.subArraySumOptimised(new int[]{2, 3, -4, 1}, 2), 2);
+        Assert.assertEquals(subArraySumOfK.subArraySumOptimised(new int[]{2, 5, 5}, 10), 1);
     }
 }

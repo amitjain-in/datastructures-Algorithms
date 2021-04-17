@@ -1,5 +1,7 @@
 package amit.problems.trees;
 
+import amit.problems.trees.inttree.TreeNode;
+
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -8,17 +10,6 @@ import java.util.concurrent.LinkedBlockingQueue;
  * I was too lazy, so just copied the code from RightSideView here and done the change.
  */
 public class MaxSumAtLevel {
-
-    static class TreeNode {
-        final int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
-
     /**
      * @param root - The tree root
      * @return - The minimum level at which the sum of all values at that level of binary tree is maximum of all levels.

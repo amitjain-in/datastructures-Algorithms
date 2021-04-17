@@ -19,7 +19,7 @@ public class ListNode {
 
     @Override
     public String toString() {
-        return val + (next != null ? ", " + next.toString() : "]");
+        return val + "";// + (next != null ? ", " + next.toString() : "]");
     }
 
     public static ListNode toList(int[] arr) {
