@@ -1,4 +1,4 @@
-package amit.problems.backtrack;
+package amit.problems.recursion;
 
 import java.util.ArrayList;
 import java.util.Arrays;
