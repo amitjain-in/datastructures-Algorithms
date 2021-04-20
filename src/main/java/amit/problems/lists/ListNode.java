@@ -33,4 +33,17 @@ public class ListNode {
         }
         return head;
     }
+
+    public static String toString(ListNode head) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append('[');
+        while (head != null) {
+            stringBuilder.append(head.val);
+            head = head.next;
+            if(head != null) {
+                stringBuilder.append(", ");
+            }
+        }
+        return stringBuilder.append("]").toString();
+    }
 }
