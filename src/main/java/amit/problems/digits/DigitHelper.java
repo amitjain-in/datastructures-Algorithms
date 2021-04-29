@@ -31,4 +31,16 @@ public class DigitHelper {
         }
         return digSum;
     }
+
+    //Supports negative/positive numbers and returns 0 for integer overflow.
+    public static int reverse(int num) {
+        long reverse = 0;
+
+        while (num != 0) {
+            reverse = reverse * 10 + num % 10;
+            num /= 10;
+        }
+
+        return reverse < Integer.MAX_VALUE && reverse > Integer.MIN_VALUE ? (int) reverse : 0;//To manage integer overflow
+    }
 }
