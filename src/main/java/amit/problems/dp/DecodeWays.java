@@ -15,8 +15,8 @@ public class DecodeWays {
         System.out.println(decodeWays.decode("010")); //0
         System.out.println(decodeWays.decode("12"));
 
-        System.out.println(decodeWays.numDecodings("010"));
-        System.out.println(decodeWays.numDecodings("010"));
+        System.out.println(decodeWays.numDecodes("010"));
+        System.out.println(decodeWays.numDecodes("010"));
     }
 
     public int decode(String s) {
@@ -48,7 +48,7 @@ public class DecodeWays {
         return result;
     }
 
-    public int numDecodings(String s) {
+    public int numDecodes(String s) {
         int n = s.length();
         if (n == 0) return 0;
 

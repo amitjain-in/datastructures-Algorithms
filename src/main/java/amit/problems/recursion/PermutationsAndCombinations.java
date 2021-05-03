@@ -179,18 +179,18 @@ public class PermutationsAndCombinations {
     // E.g. two intervals [1, 3] [4, 5]. Then you need to print 14, 15, 24, 25 24 25. Because 1,3 expands to 1,2,3 and combination of each of those with second interval
     // First element of an interval will always be smaller or equal to second element.
     public void printNumbersOfIntervals(int[][] intervals) {
-        printNumbersOfIntervals(intervals, 0, (int) Math.pow(10, intervals.length - 1), 0);
+        printNumbersOfIntervals(intervals, 0, 0);
     }
 
-    private void printNumbersOfIntervals(int[][] intervals, int i, int tens, int add) {
-        if (i == intervals.length) {
-            System.out.println(add);
-            return;
-        }
+    private void printNumbersOfIntervals(int[][] intervals, int i, int add) {
         int interval = intervals[i][0];
         int endInterval = intervals[i][1];
         while (interval <= endInterval) {
-            printNumbersOfIntervals(intervals, i + 1, tens / 10, interval * tens + add);
+            if(i == intervals.length - 1) {
+                System.out.println(interval + add * 10);
+            } else {
+                printNumbersOfIntervals(intervals, i + 1, interval + add * 10);
+            }
             interval++;
         }
     }

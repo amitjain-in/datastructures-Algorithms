@@ -3,6 +3,7 @@ package amit.problems.dp;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.function.Function;
 
 /**
  * Given an array find if you can divide the array elements into two subsets with equal sum.
@@ -14,14 +15,19 @@ public class PartitionArray {
 
     public static void main(String[] args) {
         PartitionArray pa = new PartitionArray();
+        test(pa::canPartitionEqually);
+        test(pa::canPartitionEquallyAlternate);
+        test(pa::canPartitionEquallyTabular);
+    }
 
-        System.out.println(pa.canPartitionEqually(new int[]{1, 2, 3}));
-        System.out.println(pa.canPartitionEqually(new int[]{1, 3, 2}));
-        System.out.println(pa.canPartitionEqually(new int[]{3, 2, 2}));
-
-        System.out.println(pa.canPartitionEquallyAlternate(new int[]{1, 2, 3}));
-        System.out.println(pa.canPartitionEquallyAlternate(new int[]{1, 3, 2}));
-        System.out.println(pa.canPartitionEquallyAlternate(new int[]{3, 2, 2}));
+    private static void test(Function<int[], Boolean> func) {
+        System.out.println(func.apply(new int[]{1, 2, 3}));
+        System.out.println(func.apply(new int[]{1, 3, 2}));
+        System.out.println(func.apply(new int[]{3, 2, 2}));
+        System.out.println(func.apply(new int[]{1, 2, 3, 4}));
+        System.out.println(func.apply(new int[]{1, 1, 3, 4, 7}));
+        System.out.println(func.apply(new int[]{2, 3, 4, 6}));
+        System.out.println();
     }
 
     public boolean canPartitionEqually(int[] arr) {
@@ -66,5 +72,35 @@ public class PartitionArray {
             currSums.clear();
         }
         return prevSums.contains(0);
+    }
+
+    public boolean canPartitionEquallyTabular(int[] arr) {
+        int arrSum = Arrays.stream(arr).sum();
+
+        if (arrSum % 2 == 0) {
+            int target = arrSum / 2;
+            boolean[][] dp = new boolean[arr.length][target + 1];
+            for (int i = 0; i < arr.length; i++)
+                dp[i][0] = true;
+
+            // with only one number, we can form a subset only when the required sum is equal to its value
+            for (int s = 1; s <= target; s++) {
+                dp[0][s] = arr[0] == s;
+            }
+
+            // process all subsets for all sums
+            for (int i = 1; i < arr.length; i++) {
+                for (int s = 1; s <= target; s++) {
+                    // if we can get the sum 's' without the number at index 'i'
+                    if (dp[i - 1][s]) {
+                        dp[i][s] = dp[i - 1][s];
+                    } else if (s >= arr[i]) { // else if we can find a subset to get the remaining sum
+                        dp[i][s] = dp[i - 1][s - arr[i]];
+                    }
+                }
+            }
+            return dp[arr.length - 1] [target];
+        }
+        return false;
     }
 }
