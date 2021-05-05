@@ -9,79 +9,60 @@ package amit.problems.search.dfs;
  * Your output will either be true or false, to represent whether you could make one square using all the matchsticks the little match girl has.
  * <p>
  * https://leetcode.com/problems/matchsticks-to-square/
- *
- * Status: Not working
+ * <p>
  */
 public class MatchSticksToArray {
 
     public static void main(String[] args) {
         MatchSticksToArray matchSticksToArray = new MatchSticksToArray();
-      //  System.out.println(matchSticksToArray.makesquare(new int[]{1, 1, 2, 2, 2}));//true
-      //  System.out.println(matchSticksToArray.makesquare(new int[]{3, 3, 3, 3, 4}));//false
-      //  System.out.println(matchSticksToArray.makesquare(new int[]{10, 6, 5, 5, 5, 3, 3, 3, 2, 2, 2, 2}));//true
+        System.out.println(matchSticksToArray.makesquare(new int[]{1, 1, 2, 2, 2}));//true
+        System.out.println(matchSticksToArray.makesquare(new int[]{3, 3, 3, 3, 4}));//false
+        System.out.println(matchSticksToArray.makesquare(new int[]{10, 6, 5, 5, 5, 3, 3, 3, 2, 2, 2, 2}));//true
         System.out.println(matchSticksToArray.makesquare(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15}));//true
-
+        System.out.println(matchSticksToArray.makesquare(new int[]{5, 5, 5, 5, 4, 4, 4, 4, 3, 3, 3, 3}));//true
+        System.out.println(matchSticksToArray.makesquare(new int[]{7, 1, 13, 6, 19, 18, 12, 3, 15, 4, 20, 11, 2, 15, 14}));//true
     }
 
+    //solutions works but times out. Also adding memoization doesn't help. Simple do as dfs instead over sorted array
     public boolean makesquare(int[] nums) {
         int squareSide = findSquareSide(nums);
         if (squareSide != -1) {
-            return isSquare(nums, squareSide, new int[nums.length], 4, 0);
+            return countSubsets(nums, squareSide, 4, 0, 0);
         }
         return false;
     }
 
+    private static final int USED = -1;
 
-    public boolean isSquare(int[] nums, int squareSide, int[] used, int counter, int sum) {
+    boolean countSubsets(int[] arr, int subsetSum, int count, int currentSum, int indicesUsed) {
+        if (count == 0) {
+            return indicesUsed == arr.length;
+        }
+
+        for (int idx = 0; idx < arr.length; idx++) {
+            if (arr[idx] != USED) {
+                if (arr[idx] > subsetSum) {
+                    return false;
+                } else {
+                    int element = arr[idx];
+                    arr[idx] = USED;
+                    boolean found;
+                    if (currentSum + element == subsetSum) {
+                        found = countSubsets(arr, subsetSum, count - 1, 0, indicesUsed + 1);
+                    } else {
+                        found = countSubsets(arr, subsetSum, count, currentSum + element, indicesUsed + 1);
+                    }
+                    if (found) {
+                        return true;
+                    } else {
+                        arr[idx] = element;//backtrack
+                    }
+                }
+            }
+        }
+
         return false;
     }
-
-//    public boolean isSquare(int[] nums, int squareSide, int[] used, int counter, int sum) {
-//        boolean foundSum = false;
-//        for (int i = 0; i < nums.length; i++) {
-//            if (used[i] <= 0 && used[i] != -1 * counter) {
-//                if (sum + nums[i] == squareSide) {
-//                    sum += nums[i];
-//                    used[i] = counter;
-//                    foundSum = true;
-//                    break;
-//                } else if (sum + nums[i] < squareSide) {
-//                    sum += nums[i];
-//                    used[i] = counter;
-//                }
-//            }
-//        }
-//        if (foundSum) {
-//            if (counter == 1) {
-//                return true;
-//            } else {
-//                if(isSquare(nums, squareSide, used, counter - 1, 0)) {
-//                    return true;
-//                } else {
-//                    int backtrack = nums.length - 1;
-//                    while (backtrack >= 0) {
-//                        if (used[backtrack] == counter) {
-//                            used[backtrack] = -counter;
-//                            sum -= nums[backtrack];
-//                            return isSquare(nums, squareSide, used, counter, sum);
-//                        }
-//                        backtrack--;
-//                    }
-//                }
-//            }
-//        } else {
-//            int backtrack = nums.length - 1;
-//            while (backtrack >= 0) {
-//                if (used[backtrack] == counter) {
-//                    used[backtrack] = -counter;
-//                    sum -= nums[backtrack];
-//                    return isSquare(nums, squareSide, used, counter, sum);
-//                }
-//                backtrack--;
-//            }
-//        }
-//        return false;
-//    }
 
     public int findSquareSide(int[] nums) {
         int total = 0;
