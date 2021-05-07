@@ -5,6 +5,10 @@ import java.util.List;
 
 /**
  * For a given number ‘N’, write a function to generate all combination of ‘N’ pairs of balanced parentheses.
+ *
+ * https://leetcode.com/problems/generate-parentheses/
+ *
+ * Status: works
  */
 public class GenerateParentheses {
 
@@ -23,7 +27,7 @@ public class GenerateParentheses {
         if(remain == 0) {
             result.add(str);
         }
-        if (remain >= 2 * opens) {//This means that we can add open more brackets and then next method call will close it.
+        if (remain > opens) {//This means that we can add open more brackets and then next method call will close it.
             generateValidParentheses(remain - 1, str + '(', opens + 1, result);
         }
         if(opens > 0) {
@@ -36,6 +40,9 @@ public class GenerateParentheses {
         System.out.println("All combinations of balanced parentheses are: " + result);
 
         result = GenerateParentheses.generateValidParentheses(3);
+        System.out.println("All combinations of balanced parentheses are: " + result);
+
+        result = GenerateParentheses.generateValidParentheses(4);
         System.out.println("All combinations of balanced parentheses are: " + result);
     }
 }
