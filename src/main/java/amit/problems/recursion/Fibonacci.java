@@ -1,6 +1,7 @@
 package amit.problems.recursion;
 
-// Doesn't support if the number goes beyond Integer.MAX
+import java.util.Arrays;
+
 public class Fibonacci {
 
     public static void main(String[] args) {
@@ -9,11 +10,14 @@ public class Fibonacci {
         for (int i = 1; i < tillN; i++) {
             long startTs = System.nanoTime();
             long sim = fibonacci.generate(i);
-            long simNano = System.nanoTime() - startTs;
+            double simNano = (System.nanoTime() - startTs) / 1000.0;
             startTs = System.nanoTime();
             long dp = fibonacci.generateWithDP(i, fibonacci.generateBlankDP(i));
-            long dpNano = System.nanoTime() - startTs;
-            System.out.println(i + " -- " + sim + " " + simNano + " ns " + dp + " " + dpNano + " ns");
+            double dpNano = (System.nanoTime() - startTs) / 1000.0;
+            startTs = System.nanoTime();
+            long bd = fibonacci.generateBottomDownWithoutTable(i);
+            double bdNano = (System.nanoTime() - startTs) / 1000.0;
+            System.out.println(i + " -- Recursive: " + sim + " " + simNano + " us, TopDown: " + dp + " " + dpNano + " us, bottomDownWithoutTable: " + bd + " " + bdNano + " us");
         }
     }
 
@@ -21,23 +25,34 @@ public class Fibonacci {
         return n == 0 || n == 1 ? n : generate(n - 1) + generate(n - 2);
     }
 
-    private long generateWithDP(int n, long[][] dp) {
-        if(n > 2) {
-            if (dp[n - 1][0] != Long.MIN_VALUE) {
-                return dp[n - 1][0];
+    private long generateWithDP(int n, long[] dp) {
+        if (n > 2) {
+            if (dp[n] != Long.MIN_VALUE) {
+                return dp[n];
             }
         }
 
-        long fib = n == 0 || n == 1 ? n : generate(n - 1) + generate(n - 2);
-        dp[n - 1][0] = fib;
+        long fib = n == 0 || n == 1 ? n : generateWithDP(n - 1, dp) + generateWithDP(n - 2, dp);
+        dp[n] = fib;
         return fib;
     }
 
-    private long[][] generateBlankDP(int n) {
-        long[][] dp = new long[n][1];
-        for(int i=0;i < n; i++) {
-            dp[i][0] = Long.MIN_VALUE;
-        }
+    private long[] generateBlankDP(int n) {
+        long[] dp = new long[n + 1];
+        Arrays.fill(dp, Long.MIN_VALUE);
         return dp;
+    }
+
+    private long generateBottomDownWithoutTable(int n) {
+        long n2 = 0;
+        long n1 = 1;
+        long fib = n1 + n2;
+
+        for (int i = 2; i <= n; i++) {
+            fib = n1 + n2;
+            n2 = n1;
+            n1 = fib;
+        }
+        return fib;
     }
 }
