@@ -2,7 +2,9 @@ package amit.problems.bittwidller;
 
 public class BitBasics {
 
+    @SuppressWarnings({"ConstantConditions", "PointlessBitwiseExpression"})
     public static void main(String[] args) {
+        bitPlay();
         numbers();
         int a = 10;
         System.out.println("a = " + a + " in binary a =" + Integer.toBinaryString(a));
@@ -18,6 +20,14 @@ public class BitBasics {
         //This is why ring buffer size needs to be power 2. Masking is faster than module operation. In modulo assignments we lose the 1 and they are slower
         for (int i = 0; i <= rb * 2; i++) {
             System.out.println(i + " & " + rb + " = " + (i & rb) + " vs " + i + " % " + rb + " = " + (i % rb));
+        }
+    }
+
+    private static void bitPlay() {
+        int intMax = Integer.MAX_VALUE;
+        int one  = 1;
+        for(int i = 1; i <  31; i++) {
+            System.out.println((intMax >> i) + " " + (intMax >>> i) + " " + (one << i));
         }
     }
 }

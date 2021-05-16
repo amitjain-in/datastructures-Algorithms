@@ -27,24 +27,24 @@ public class SpiralMatrix {
                 result.add(matrix[row][col]);
                 total--;
             }
-            rowStart++;
 
+            row = ++rowStart;
             col = colEnd;
-            for (row = rowStart; row <= rowEnd && total > 0; row++) { //Last Column
+            for (; row <= rowEnd && total > 0; row++) { //Last Column
                 result.add(matrix[row][col]);
                 total--;
             }
-            colEnd--;
 
+            col = --colEnd;
             row = rowEnd;
-            for (col = colEnd; col >= colStart && total > 0; col--) { //Last row
+            for (; col >= colStart && total > 0; col--) { //Last row
                 result.add(matrix[row][col]);
                 total--;
             }
-            rowEnd--;
 
+            row = --rowEnd;
             col = colStart;
-            for (row = rowEnd; row >= rowStart && total > 0; row--) { //First Column
+            for (; row >= rowStart && total > 0; row--) { //First Column
                 result.add(matrix[row][col]);
                 total--;
             }
