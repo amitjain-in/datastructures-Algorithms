@@ -24,4 +24,15 @@ public class ArrayUtils {
 
         return wrapper;
     }
+
+    public static Character[][] wrapper(char[][] grid) {
+        Character[][] wrapper = new Character[grid.length][grid[0].length];
+        for(int row = 0; row < grid.length; row++) {
+            for(int col = 0; col < grid[0].length; col++) {
+                wrapper[row][col] = grid[row][col];
+            }
+        }
+
+        return wrapper;
+    }
 }
