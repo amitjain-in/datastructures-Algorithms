@@ -25,7 +25,7 @@ public class SubArraySumOfK {
         return count;
     }
 
-    //O(n)
+    //O(n) with prefix sum - Works
     public int subArraySumOptimised(int[] nums, int k) {
         Map<Integer, Integer> sumMap = new HashMap<>();
         int sum = 0;
@@ -39,57 +39,14 @@ public class SubArraySumOfK {
         return count;
     }
 
-    //Some test cases fail.
-    public int oneMoreWithoutMap(int[] nums, int k) {
-
-        if (nums.length == 0) {
-            return 0;
-        }
-
-        int sum = nums[0];
-        int count = sum == k ? 1 : 0;
-        int start = 0;
-        int end = 1;
-        if (end < nums.length) {
-            sum += nums[end];
-        }
-
-        while (start <= end && end < nums.length) {
-            if (sum <= k) {
-                if (sum == k) {
-                    count++;
-                }
-                System.out.println("<= sum=" + sum + " count=" + count + " start=" + start + " end=" + end);
-                if (end == nums.length - 1 && start < end) {
-                    sum -= nums[start++];
-                } else {
-                    end++;
-                    if (end < nums.length) {
-                        sum += nums[end];
-                    }
-                }
-            } else {
-                System.out.println("> sum=" + sum + " count=" + count + " start=" + start +  " end=" + end);
-                if(start < end) {
-                    sum -= nums[start++];
-                } else {
-                    end++;
-                    if (end < nums.length) {
-                        sum += nums[end];
-                    }
-                }
-            }
-        }
-
-        return count;
-    }
-
     public static void main(String[] args) {
         SubArraySumOfK subArraySumOfK = new SubArraySumOfK();
-//        subArraySumOfK.subArraySumBruteForce(new int[]{2, 3, 4, 1}, 4);//, 1);
-//        subArraySumOfK.subArraySumBruteForce(new int[]{2, 3, -4, 1}, 2);//, 2);
-//        System.out.println(subArraySumOfK.oneMore(new int[]{-1, -1, 1}, 0));//, 1);
-        System.out.println(subArraySumOfK.oneMoreWithoutMap(new int[]{100, 1, 2, 3, 100, 1, 2, 3, 4}, 3));//, 1);
-//        subArraySumOfK.subArraySumBruteForce(new int[]{1, 1, 2}, 2);//, 2);
+        subArraySumOfK.subArraySumBruteForce(new int[]{2, 3, 4, 1}, 4);//, 1);
+        subArraySumOfK.subArraySumBruteForce(new int[]{2, 3, -4, 1}, 2);//, 2);;
+        subArraySumOfK.subArraySumBruteForce(new int[]{1, 1, 2}, 2);//, 2);
+
+        subArraySumOfK.subArraySumOptimised(new int[]{2, 3, 4, 1}, 4);//, 1);
+        subArraySumOfK.subArraySumOptimised(new int[]{2, 3, -4, 1}, 2);//, 2);;
+        subArraySumOfK.subArraySumOptimised(new int[]{1, 1, 2}, 2);//, 2);
     }
 }

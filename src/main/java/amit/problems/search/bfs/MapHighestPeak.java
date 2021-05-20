@@ -47,7 +47,7 @@ public class MapHighestPeak {
             for (int[] bfsIndex : bfsIndices) {
                 if ((isBound(cell.row + bfsIndex[0], cell.col + bfsIndex[1], rows, cols, isWater, heights))) {
                     heights[cell.row + bfsIndex[0]][cell.col + bfsIndex[1]] = heights[cell.row][cell.col] + 1;
-                    bfs.add(new Cell(cell.row + bfsIndex[0], cell.col + +bfsIndex[1]));
+                    bfs.add(new Cell(cell.row + bfsIndex[0], cell.col + bfsIndex[1]));
                 }
             }
         }

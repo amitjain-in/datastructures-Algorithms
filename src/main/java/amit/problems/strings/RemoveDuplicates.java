@@ -13,10 +13,10 @@ public class RemoveDuplicates {
     //Status works: Taken from https://leetcode.com/problems/remove-duplicate-letters/discuss/76769/Java-solution-using-Stack-with-comments;
     public String removeDuplicateLetters(String sr) {
 
-        int[] res = new int[26]; //will contain number of occurences of character (i+'a')
+        int[] res = new int[26]; //will contain number of occurrences of character (i+'a')
         boolean[] visited = new boolean[26]; //will contain if character (i+'a') is present in current result Stack
         char[] ch = sr.toCharArray();
-        for (char c : ch) {  //count number of occurences of character
+        for (char c : ch) {  //count number of occurrences of character
             res[c - 'a']++;
         }
         Stack<Character> st = new Stack<>(); // answer stack
@@ -24,7 +24,7 @@ public class RemoveDuplicates {
         for (char s : ch) {
             index = s - 'a';
             res[index]--;   //decrement number of characters remaining in the string to be analysed
-            if (visited[index]) //if character is already present in stack, dont bother
+            if (visited[index]) //if character is already present in stack, don't bother
                 continue;
             //if current character is smaller than last character in stack which occurs later in the string again
             //it can be removed and  added later e.g stack = bc remaining string abc then a can pop b and then c

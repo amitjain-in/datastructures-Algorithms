@@ -31,7 +31,7 @@ public class SumDivisibleByK {
     }
 
 
-    //o(n)
+    //o(n) - Works efficiently when K is small
     public int subarraysDivByK(int[] A, int K) {
         int sum = 0;
         int count = 0;

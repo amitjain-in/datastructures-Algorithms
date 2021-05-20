@@ -3,9 +3,9 @@ package amit.problems.dp;
 import java.util.Arrays;
 
 /**
- * Find the maximum increasing array (include non-contiguous elements too in sub-array consideration).
+ * Find the maximum (in length) increasing subsequence (include non-contiguous elements too in sub-array consideration).
  */
-public class LongestIncreasingSubArray {
+public class LongestIncreasingSubsequence {
 
     public static void main(String[] args) {
         System.out.println(Arrays.toString(longestIncreasingSubArray(new int[]{6, 2, 5, 1, 7, 4, 8, 3})));//2, 5, 7, 8

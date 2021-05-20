@@ -14,20 +14,18 @@ public class LetterCaseStringPermutation {
         return permutations;
     }
 
-    public static void findPermutations(String str, int start, String result, List<String> permutations) {
+    public static void findPermutations(String str, int idx, String result, List<String> permutations) {
         if (result.length() == str.length()) {
             permutations.add(result);
             return;
         }
-        for (int idx = start; idx < str.toCharArray().length; idx++) {
-            char car = str.charAt(idx);
-            findPermutations(str, idx + 1, result + car, permutations);
-            if (Character.isLetter(car)) {
-                if (Character.isUpperCase(car)) {//isUppercase
-                    findPermutations(str, idx + 1, result + Character.toLowerCase(car), permutations);
-                } else {
-                    findPermutations(str, idx + 1, result + Character.toUpperCase(car), permutations);
-                }
+        char car = str.charAt(idx);
+        findPermutations(str, idx + 1, result + car, permutations);//Original case
+        if (Character.isLetter(car)) {//Opposite case.
+            if (Character.isUpperCase(car)) {//isUppercase
+                findPermutations(str, idx + 1, result + Character.toLowerCase(car), permutations);
+            } else {
+                findPermutations(str, idx + 1, result + Character.toUpperCase(car), permutations);
             }
         }
     }

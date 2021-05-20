@@ -41,8 +41,8 @@ public class OnesAndZeroes {
             switch (c) {
                 case '0':
                     count[0]++;
-
                     break;
+
                 case '1':
                     count[1]++;
                     break;

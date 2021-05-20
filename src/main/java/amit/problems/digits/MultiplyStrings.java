@@ -34,32 +34,38 @@ public class MultiplyStrings {
         for (int i = m - 1; i >= 0; i--) {
             for (int j = n - 1; j >= 0; j--) {
                 int mul = (num1.charAt(i) - '0') * (num2.charAt(j) - '0');
-                int p1 = i + j, p2 = i + j + 1;
-                int sum = mul + pos[p2];
+                int curr = i + j, next = i + j + 1;
+                int sum = mul + pos[next];
 
-                pos[p1] += sum / 10;
-                pos[p2] = (sum) % 10;//Carry for next multiple
+                pos[curr] += sum / 10;
+                pos[next] = sum % 10;//Carry for next multiple
             }
         }
 
         StringBuilder sb = new StringBuilder();
-        for (int p : pos) if (!(sb.length() == 0 && p == 0)) sb.append(p);
+        for (int p : pos) {
+            if (sb.length() == 0 && p == 0) {
+                continue;
+            }
+            sb.append(p);
+        }
         return sb.length() == 0 ? "0" : sb.toString();
     }
 
 
     public static void main(String[] args) {
         MultiplyStrings multiplyStrings = new MultiplyStrings();
-        System.out.println(multiplyStrings.multiply("9", "99"));
-        System.out.println(multiplyStrings.multiply("9", "98"));
-        System.out.println(multiplyStrings.multiply("98", "9"));
-        System.out.println(multiplyStrings.multiply("9", "9"));
-        System.out.println(multiplyStrings.multiply("2", "3"));
-        System.out.println(multiplyStrings.multiply("2", "0"));
-        System.out.println(multiplyStrings.multiply("0", "2"));
-        System.out.println(multiplyStrings.multiply("5", "1"));
-        System.out.println(multiplyStrings.multiply("1", "5"));
-        System.out.println(multiplyStrings.multiply("1", "5"));
-        System.out.println(multiplyStrings.multiply("123", "456"));
+//        System.out.println(multiplyStrings.multiply("9", "99"));
+//        System.out.println(multiplyStrings.multiply("9", "98"));
+//        System.out.println(multiplyStrings.multiply("98", "9"));
+//        System.out.println(multiplyStrings.multiply("9", "9"));
+        System.out.println(multiplyStrings.multiplyFromLeetcode("2", "3"));
+        System.out.println(multiplyStrings.multiplyFromLeetcode("12", "2"));
+//        System.out.println(multiplyStrings.multiply("2", "0"));
+//        System.out.println(multiplyStrings.multiply("0", "2"));
+//        System.out.println(multiplyStrings.multiply("5", "1"));
+//        System.out.println(multiplyStrings.multiply("1", "5"));
+//        System.out.println(multiplyStrings.multiply("1", "5"));
+//        System.out.println(multiplyStrings.multiply("123", "456"));
     }
 }

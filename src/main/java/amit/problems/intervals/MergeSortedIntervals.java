@@ -1,4 +1,4 @@
-package amit.problems.arrays;
+package amit.problems.intervals;
 
 import java.util.Arrays;
 import java.util.LinkedList;
