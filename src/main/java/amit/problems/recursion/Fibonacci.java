@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class Fibonacci {
 
     public static void main(String[] args) {
-        int tillN = 100;
+        int tillN = 92; //long overflow beyond this.
         Fibonacci fibonacci = new Fibonacci();
         for (int i = 1; i < tillN; i++) {
             long startTs = System.nanoTime();
